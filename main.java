@@ -9,8 +9,11 @@ class RomanArabianCalc {
     static char operation;
     static int result;
 
+    /**
+     * @param args
+     */
     public static void main (String[] args) {
-        System.out.println("Введите выражение [2+2] или два римских числа от I до X:[V+V] + Enter ");
+        System.out.print("Введите выражение [2+2] или два римских числа от I до X:[V+V] + Enter ");
 //      Считываем строку userInput которую ввёл пользователь
         String userInput = scanner.nextLine();
 //      Создаём пустой символьный массив длиной 10 символов:  under_char
@@ -30,6 +33,7 @@ class RomanArabianCalc {
             if (under_char[i] == '/') {
                 operation = '/';
             }
+            
         }
         String under_charString = String.valueOf(under_char);
         String[] blacks = under_charString.split("[+-/*]");
@@ -51,22 +55,26 @@ class RomanArabianCalc {
         result = calculated(number1, number2, operation);
         System.out.println("--Результат для арабских цифр----");
         System.out.println(number1 + " " + operation + " " + number2 + " = " + result);
+
+        if (result <= 10) {
+            // Вывести результат
+        } else {
+            System.out.println("Error: Result is greater than 10!");
+        }
     }
 
     private static String convertNumToRoman (int numArabian) {
-        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
-                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
-                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
-                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
-                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
-                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
-                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
+        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
         };
         final String s = roman[numArabian];
         return s;
     }
 
 
+    /**
+     * @param roman
+     * @return
+     */
     private static int romanToNumber (String roman) {
         try {
             if (roman.equals("I")) {
@@ -96,6 +104,9 @@ class RomanArabianCalc {
         return -1;
     }
 
+
+
+
     public static int calculated (int num1, int num2, char op) {
         int result = 0;
         switch (op) {
@@ -122,5 +133,26 @@ class RomanArabianCalc {
                 throw new IllegalArgumentException("Не верный знак операции");
         }
         return result;
+    }
+
+
+    public static void setScanner(Scanner scanner) {
+        RomanArabianCalc.scanner = scanner;
+    }
+
+    public static void setNumber1(int number1) {
+        RomanArabianCalc.number1 = number1;
+    }
+
+    public static void setNumber2(int number2) {
+        RomanArabianCalc.number2 = number2;
+    }
+
+    public static void setOperation(char operation) {
+        RomanArabianCalc.operation = operation;
+    }
+
+    public static void setResult(int result) {
+        RomanArabianCalc.result = result;
     }
 }
